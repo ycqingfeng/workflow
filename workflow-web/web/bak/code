@@ -1,0 +1,135 @@
+var graphics = {
+    nodes: {
+        /*A*/A: {type: 'start', next: 'B'},
+        /*B*/B: {type: 'activity', next: 'C'},
+        /*C*/C: {type: 'activity', next: 'D'},
+        /*D*/D: {type: 'gateway', forks: {'yes': 'F', 'default': "H", 'no': 'G'}},
+        /*E*/E: {type: 'activity', next: 'B'},
+        /*F*/F: {type: 'activity', next: 'H'},
+        /*G*/G: {type: 'gateway', forks: {'yes': 'H', 'no':'E'}},
+        /*H*/H: {type: 'event'}
+    }
+
+}
+
+
+this.len = 0;
+this.mat = [];
+
+var initMat = (function () {
+    this.len = Object.keys(this.nodes).length;
+    for (var i = 0; i < this.len; i++) {
+        this.mat[i] = new Array(this.len);
+    }
+
+}).call(this);
+
+var node2Mat = function (name, pos) {
+    for (var i = 0; i < pos.y - 1; i++) {
+        for (var j = 0; j < this.len; j++) {
+            if (name == this.mat[i][j]) {
+                return pos;
+            }
+        }
+    }
+
+    this.mat[pos.y][pos.x] = name;
+    switch (this.nodes[name].type) {
+        case 'start':
+        case 'event':
+        case 'activity':
+            if (this.nodes[name].next !== undefined) {
+                pos.y++;
+                node2Mat.call(this, this.nodes[name].next, pos);
+            }
+            break;
+        case 'gateway':
+            pos.y++;
+            var anchorPos = {x: pos.x, y: pos.y};
+            for (var key in this.nodes[name].forks) {
+                node2Mat.call(this, this.nodes[name].forks[key], pos);
+                pos.y = anchorPos.y;
+                pos.x++;
+            }
+            break;
+    }
+    return pos;
+};
+
+for (var key in this.nodes) {
+    if (this.nodes[key].type == 'start') {
+        node2Mat.call(this, key, {x: 0, y: 0});
+        break;
+    }
+}
+
+
+console.log(this.mat);
+
+var calcDeep = function () {
+
+    var deepCache = {};
+    for (var nodeKey in this.nodes) {
+
+    }
+};
+
+this.parse = function () {
+    // console.log(this.mat);
+};
+
+calcDeep();
+
+
+
+
+this.getStartFitPos = function (pos) {
+                // var sx = this.startNode.obj.cx(), sy = this.startNode.obj.cy();
+                // var tx, ty;
+                // var degree = 90 - Math.atan((pos.x - sx) / (pos.y - sy)) / (Math.PI / 180) + (pos.y >= sy ? 0 : 180);
+                // if (degree >= 45 && degree < 155) {
+                //     tx = this.startNode.obj.cx(), ty = this.startNode.bottom();
+                // } else if (degree >= 155 && degree < 205) {
+                //     tx = this.startNode.left(), ty = this.startNode.obj.cy();
+                // } else if (degree >= 205 && degree < 335) {
+                //     tx = this.startNode.obj.cx(), ty = this.startNode.top();
+                // } else {
+                //     tx = this.startNode.right(), ty = this.startNode.obj.cy();
+                // }
+                // return {'x': tx, 'y': ty};
+                return {'x': this.startNode.obj.cx(), 'y': this.startNode.obj.cy()}
+            };
+
+this.getEndFitPos = function (pos) {
+                // var sx = this.endNode.obj.cx(), sy = this.endNode.obj.cy();
+                // var tx, ty;
+                // var degree = 90 - Math.atan((-pos.x + sx) / (-pos.y + sy)) / (Math.PI / 180) + (pos.y >= sy ? 0 : 180);
+                // if (degree >= 45 && degree < 155) {
+                //     tx = this.endNode.obj.cx(), ty = this.endNode.bottom();
+                // } else if (degree >= 155 && degree < 205) {
+                //     tx = this.endNode.left(), ty = this.endNode.obj.cy();
+                // } else if (degree >= 205 && degree < 335) {
+                //     tx = this.endNode.obj.cx(), ty = this.endNode.top();
+                // } else {
+                //     tx = this.endNode.right(), ty = this.endNode.obj.cy();
+                // }
+                // console.log(degree);
+                // return {'x': tx, 'y': ty};
+                return {'x': this.endNode.obj.cx(), 'y': this.endNode.obj.cy()}
+
+            };
+
+
+if(pos.x < this.obj.cx() && pos.y < this.obj.cy()){ // 1
+
+}else if(pos.x > this.obj.cx() && pos.y < this.obj.cy){ //4
+
+}else if(pos.x > this.obj.cx() && pos.y > this.obj.cy()){   //3
+
+}else{  //2
+
+}
+
+
+
+

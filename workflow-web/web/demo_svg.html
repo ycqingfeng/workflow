@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul, li, ol {
+            list-style: none;
+        }
+    </style>
+    <link href="component-assets/workflow.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<!--oncontextmenu="self.event.returnValue=false"-->
+<div id="drawing" oncontextmenu="self.event.returnValue=false" style="height: 600px;width: 1000px;"></div>
+
+</body>
+<script src="svg.js"></script>
+<script src="workflow.js"></script>
+<script>
+    var engine = new Engine("drawing");
+</script>
+</html>

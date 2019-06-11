@@ -1,0 +1,14 @@
+#workflow-left-panel{
+    width: 80px;
+    height: 100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background: #e7e7e7;
+    box-shadow: inset 0px 0 1px #6b6b6b;
+}
+
+#core-panel-background{
+    background-image: url("./workflow-background.gif");
+}
